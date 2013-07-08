@@ -1,0 +1,163 @@
+body {
+  font-size: 14px;
+  padding-top: 40px;
+  -webkit-user-select: none;
+}
+
+p {
+  margin: 0px; 
+}
+
+svg {
+  shape-rendering: geometricPrecision;
+   
+  text {
+    font-family: Century Gothic, sans-serif;
+    color: #CCCCCC;
+   }
+   
+  .svg-warning {
+    fill: #FF7000;
+  }
+
+  .svg-attention {
+    fill: #FFD717;
+  }
+
+  .svg-normal {
+    fill: #18E000;
+  }
+
+  .svg-void {
+    fill: #EEEEEE;
+  }
+}
+
+.navbar-inverse .nav > li a {
+  color: #999999;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  
+  &:hover {
+    color: #ffffff;
+    background-color: transparent;
+  }
+}
+
+.navbar-inverse .nav .active a {
+  color: #FFF;
+  background-color: #111;
+}
+
+.navbar .nav > li span {
+  float: none;
+  padding: 10px 15px 10px;
+  display: block;
+}
+
+.navbar-inner > .container-fluid {
+  text-align: center;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main {
+  line-height: 135%;
+  display: block;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  height: 100%;
+  width: 1024px;
+  margin: 0 auto;
+  font-family: 'Century Gothic', sans-serif;
+  box-shadow: 0px 0px 35px 5px #CCCCCC;
+  background-color: #333;
+}
+
+@import "dashboard.less";
+
+.legend {
+  width: 65px;
+  height: 80px;
+  
+  .numbers {
+    float: right;
+    width: 62px;
+    height: 100%;
+    
+    p {
+      color: #AAA;
+      font-size: 0.8em;
+      line-height: 20%;
+      padding: 20% 0 20% 10px;
+      border-bottom: 1px solid rgba(170, 170, 170, 0.5);
+      
+      &:last-of-type {
+        border: 0;
+      }
+    }
+  }
+  
+  .legend-line {
+    float: left;
+    width: 3px;
+    height: 100%;
+    background-image: -webkit-linear-gradient(90deg, #01bfce, #6acc00 50%, #ffa800 75%, #ff3500);
+    background-image: linear-gradient(to top, #01bfce, #6acc00 50%, #ffa800 75%, #ff3500);
+  }
+  
+}
+
+@import "details.less";
+
+.box {
+  width: 40px;
+  height: 40px;
+  display: block;
+  background-color: gray;
+  margin: 0 2px 2px 0;
+  float:left;
+  cursor: pointer;
+    
+  &.dimmed {
+    background-image: -webkit-linear-gradient(0, rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+    background-image: linear-gradient(0, rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+  }
+}
+
+.mytooltip {
+  position: relative; 
+  left: -50%;
+  background-color: white;
+  opacity: 0.8;
+  border-radius: 5px;
+  font-family: "Arial", Gadget, sans-serif;
+  font-size: 16px;
+  padding: 10px; 
+  box-shadow: 0px 0px 15px 5px #888888;
+  pointer-events: none;
+  
+  .head {
+    font-weight: bold;
+  }
+}
+
+.cell9 {background-color: #ff3500;}
+.cell8 {background-color: #ff6f00;}
+.cell7 {background-color: #ffa800;}
+.cell6 {background-color: #cdb400;}
+.cell5 {background-color: #8bc400;}
+.cell4 {background-color: #6acc00;}
+.cell3 {background-color: #49d400;}
+.cell2 {background-color: #0dd15f;}
+.cell1 {background-color: #08c98e;}
+.cell0 {background-color: #01bfce;}
+
+@import "logger.less";
+
+footer {
+  p {
+    text-align: center;
+  }
+}

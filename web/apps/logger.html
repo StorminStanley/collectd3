@@ -1,0 +1,8 @@
+<div class="logger">
+  <div class="last-time" ng-class="{red:$log.getLastTime() > 1000}" 
+      ng-click="show = !show">Loaded in {{ $log.getLastTime() }}ms</div>
+  <div class="records" ng-show="show">
+    <i class="reset-button icon-trash icon-white" ng-click="$log.clearRecords()" ng-show="$log.getRecords().length"></i>
+    <div ng-repeat="record in $log.getRecords()" ng-class="{reset: record.reset}"><span class="time">t+{{(record.time / 1000).toFixed(3)}}:</span> {{record.message}}</li>
+  </div>
+</div>

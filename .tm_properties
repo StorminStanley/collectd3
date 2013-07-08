@@ -1,0 +1,3 @@
+projectDirectory     = "$CWD"
+TM_PROJECT_DIRECTORY = "$projectDirectory"
+TM_JSLINTMATE_JSHINT_OPTIONS_FILE = "$projectDirectory/.jshintrc"

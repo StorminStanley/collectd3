@@ -1,0 +1,25 @@
+server:
+  data-directory: testdata
+  log-info: false
+
+client:
+  ~override: true
+  node-types:
+    hosts: 
+      host: ^host-
+      partition: root
+      disks:
+        - md0
+        - md2
+    local: 
+      host: ^localhost
+      partition: root
+      disks:
+        - md0
+        - md2
+  aggregate-storage:
+    - hosts
+    - local
+  heatmap-storage:
+    - hosts
+    - local

@@ -1,0 +1,8 @@
+.DS_Store
+.DS_Store?
+.Trashes
+.Thumbs.db
+
+npm-debug.log
+node_modules/*
+web/css/*.css

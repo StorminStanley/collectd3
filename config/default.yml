@@ -1,0 +1,105 @@
+# Server configuration
+# --------------------
+# Used for server configuration.
+# Will not be shown at client, so it's safe to store session key (or something like that) in this 
+# section.
+server:
+  # Server port
+  # For port <1024, you should run it as root
+  port: 9000
+  # Static directory
+  # Path to a directory of your static data (html, client-side js, styles, images)
+  static-directory: web
+  # Data directory
+  # Path to a directory of your collectd data. This directory should contain list of subdirectories 
+  # (one for each host with hostname as a name of subdirectory).
+  data-directory: ../sampledata
+  # Log info
+  # When false, suppress output of console.info
+  log-info: false
+
+# Client configuration
+# --------------------
+# Used for application configuration.
+# Will be avaliable at host:port/config interface.
+client:
+  # CGP url
+  # Path to a CGP for expanded view.
+  cgp-url: 'http://example.com'
+  # Node types
+  # List of types of hosts we are working with. For now, there are two use-cases: we may refer to 
+  # this types in another config section (like heatmap or aggregate-storage) to limit a list of 
+  # hosts it should fetch, or we may want to define which disk or partition we want to show at
+  # details view. 
+  # For second use-case, only first appearance of specific property matters. For example, if we 
+  # have two types of identical host (like we have with storage and all-storage) and they both have 
+  # different partition property, server picks first and ignore second.
+  node-types:
+    # Node type identifier
+    storage:
+      # Type name
+      name: Storage nodes
+      # Regular expression to match with hostname
+      host: ^u[a,s]-s
+      # Partition to show at Details view
+      partition: root
+      # List of disks to calculate troughput of.
+      disks:
+        - md0
+        - md2
+    compute:
+      name: Compute nodes
+      host: ^u[a,s]-c
+      partition: var-lib-nova-instances
+      disks:
+        - md0
+        - md2
+    control:
+      name: Control
+      host: ^u[a,s]-p
+      partition: root
+      disks:
+        - md0
+        - md2
+    nova:
+      name: Nova
+      host: ^nova
+      partition: root
+      disks:
+        - md0
+        - md2
+    swift:
+      name: Swift
+      host: ^swift
+      partition: root
+      disks:
+        - md0
+        - md2
+    all-compute:
+      name: Compute
+      host: ^u[a,s]-c|^nova
+    all-storage:
+      name: Storage
+      host: ^u[a,s]-s|^swift
+    all-control:
+      name: Control
+      host: ^u[a,s]-p|^u[a,s]-v|^collectd|^puppet
+  # List of categories on Dashboard heatmap
+  heatmap:
+    - all-storage
+    - all-compute
+    - all-control
+  # List of types to aggregate Storage from
+  aggregate-storage:
+    - storage
+    - compute
+    - control
+    - nova
+    - swift
+  # List of types to draw on Storage heatmap
+  heatmap-storage:
+    - storage
+    - compute
+    - control
+    - nova
+    - swift

@@ -1,0 +1,199 @@
+<div>
+  <div class="dashboard">
+    
+    <div class="card-area" ng-click="switchCard('load')" ng-class="card == 'load' && 'active'">
+      <div class="header">
+        <p class="name">Load</p>
+        <div class="status-bar">
+          <p class="text">{{ statusOf( 'load', aggregate.load.average ).text }}</p>
+          <svg class="icon">
+            <circle class="{{ statusOf( 'load', aggregate.load.average ).status }}" cx="6" cy="6" r="6"></circle>
+          </svg>
+        </div>
+      </div>
+      <div class="body">
+        <div class="big">
+          <p class="number {{ statusOf( 'load', aggregate.load.average ).status }}">
+            {{ aggregate.load.average | number:2 }}<span class="unit"></span>
+          </p>
+          <p class="kpi-label">average load</p>
+        </div><!-- no linebreak here --><div class="small">
+          <p class="number {{ statusOf( 'load', aggregate.load.peak ).status }}">
+            {{ aggregate.load.peak | number:2 }}<span class="unit"></span>
+          </p>
+          <p class="kpi-label">peak</p>
+        </div>
+      </div>
+      <div class="trend">
+        <img src="/img/trend1.png" alt="trend chart"/>
+      </div>
+    </div>
+    
+    <div class="card-area" ng-click="switchCard('memory')" ng-class="card == 'memory' && 'active'">
+      <div class="header">
+        <p class="name">Memory</p>
+        <div class="status-bar">
+          <p class="status">{{ statusOf( 'memory', aggregate.memory.allocated ).text }}</p>
+          <svg class="icon">
+            <circle class="{{ statusOf( 'memory', aggregate.memory.allocated ).status }}" cx="6" cy="6" r="6"></circle>
+          </svg>
+        </div>
+      </div>
+      <div class="body">
+        <div class="big">
+          <p class="number {{ statusOf( 'memory', aggregate.memory.allocated ).status }}">
+            {{ aggregate.memory.allocated | number:0 }}<span class="unit">%</span>
+          </p>
+          <p class="kpi-label">capacity allocated</p>
+        </div><!-- no linebreak here --><div class="small">
+          <p class="number {{ statusOf( 'memory', aggregate.memory.committed ).status }}">
+            {{ aggregate.memory.committed | number:0 }}<span class="unit">%</span>
+          </p>
+          <p class="kpi-label">committed</p>
+        </div>
+      </div>
+      <div class="trend">
+        <img src="/img/trend2.png" alt="trend chart"/>
+      </div>
+    </div>
+    
+    <div class="card-area" ng-click="switchCard('storage')" ng-class="card == 'storage' && 'active'">
+      <div class="header">
+        <p class="name">Storage</p>
+        <div class="status-bar">
+          <p class="status">{{ statusOf( 'storage', aggregate.storage.allocated ).text }}</p>
+          <svg class="icon">
+            <circle class="{{ statusOf( 'storage', aggregate.storage.allocated ).status }}" cx="6" cy="6" r="6"></circle>
+          </svg>
+        </div>
+      </div>
+      <div class="body">
+        <div class="big">
+          <p class="number {{ statusOf( 'storage', aggregate.storage.average ).status }}">
+            {{ b2s(aggregate.storage.average).value | number:0 }}<span class="unit">{{ b2s(aggregate.storage.average).multi }}</span>
+          </p>
+          <p class="kpi-label">average octets<br>24 hours</p>
+        </div><!-- no linebreak here --><div class="small">
+          <p class="number {{ statusOf( 'storage', aggregate.storage.peak ).status }}">
+            {{ b2s(aggregate.storage.peak).value  | number:0 }}<span class="unit">{{ b2s(aggregate.storage.peak).multi }}</span>
+          </p>
+          <p class="kpi-label">peak</p>
+        </div>
+      </div>
+      <div class="trend">
+        <img src="/img/trend3.png" alt="trend chart"/>
+      </div>
+    </div>
+    
+    <div class="card-area" ng-click="switchCard('network')" ng-class="card == 'network' && 'active'">
+      <div class="header">
+        <p class="name">Network</p>
+        <div class="status-bar">
+          <p class="status">{{ statusOf( 'network-errors', aggregate.network.errors ).text }}</p>
+          <svg class="icon">
+            <circle class="{{ statusOf( 'network-errors', aggregate.network.errors ).status }}" cx="6" cy="6" r="6"></circle>
+          </svg>
+        </div>
+      </div>
+      <div class="body">
+        <div class="big">
+          <p class="number {{ statusOf( 'network', aggregate.network.average ).status }}">
+            {{ b2s(aggregate.network.average).value | number:0 }}<span class="unit">{{ b2s(aggregate.network.average).multi }}</span>
+          </p>
+          <p class="kpi-label">average octets<br>24 hours</p>
+        </div><!-- no linebreak here --><div class="small">
+          <p class="number {{ statusOf( 'network', aggregate.network.peak ).status }}">
+            {{ b2s(aggregate.network.peak).value | number:0 }}<span class="unit">{{ b2s(aggregate.network.peak).multi }}</span>
+          </p>
+          <p class="kpi-label">peak</p>
+        </div>
+      </div>
+      <div class="trend">
+        <img src="/img/trend4.png" alt="trend chart"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="content" ng-show="card == 'load'">
+    <div class="row">
+      <div class="labels">
+        <p>Load<br>by Host</p>
+      </div>
+      <div class="charts">
+        <d3-tooltip message="tooltip"></d3-tooltip>
+        <d3-heatmap d3-click="moveTo(key)" d3-mouseover="showTooltip(key, value, 'Load average')" 
+          d3-mouseout="hideTooltip()" d3-mousemove="moveTooltip(x,y)" 
+          val="load.heatmap" domain="0,1" config="config">
+        </d3-heatmap>
+        <d3-legend limits="0.5, 0.8" val="load.heatmap"></d3-legend>
+      </div>
+    </div>
+    <div class="row">
+      <div class="labels">
+        <p>Average Load<br>in Near Past</p>
+      </div>
+      <div class="charts">
+        <div class="row-fluid average">
+          <div class="span4">
+            <d3-speedometer val="load.average.shortterm | number:2" title="1 minute"></d3-speedometer>
+          </div>
+          <div class="span4">
+            <d3-speedometer val="load.average.midterm | number:2" title="5 minutes"></d3-speedometer>
+          </div>
+          <div class="span4">
+            <d3-speedometer val="load.average.longterm | number:2" title="15 minutes"></d3-speedometer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+	
+  <div class="content" ng-show="card == 'memory'">
+    <div class="row">
+      <div class="labels">
+        <p>Memory<br>by Host</p>
+      </div>
+      <div class="charts">
+        <d3-tooltip message="tooltip"></d3-tooltip>
+        <d3-heatmap d3-click="moveTo(key)" d3-mouseover="showMemoryTooltip(key, details, 'Memory used')" 
+          d3-mouseout="hideTooltip()" d3-mousemove="moveTooltip(x,y)" 
+          val="memory.heatmap" domain="0,1" config="config">
+        </d3-heatmap>
+        <d3-legend limits="0.5, 1" val="memory.heatmap"></d3-legend>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content" ng-show="card == 'storage'">
+    <div class="row">
+      <div class="labels">
+        <p>Storage Throughput<br>by Host</p>
+      </div>
+      <div class="charts">
+        <d3-tooltip message="tooltip"></d3-tooltip>
+        <d3-heatmap d3-click="moveTo(key)" d3-mouseover="showNetworkTooltip(key, value, 'Storage Throughput')" 
+          d3-mouseout="hideTooltip()" d3-mousemove="moveTooltip(x,y)" 
+          val="storage.heatmap" domain="0, 1024, 1048576" config="config">
+        </d3-heatmap>
+        <d3-legend limits="1024, 1048576" val="storage.heatmap"></d3-legend>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content" ng-show="card == 'network'">
+    <div class="row">
+      <div class="labels">
+        <p>Network Throughput<br>by Host</p>
+      </div>
+      <div class="charts">
+        <d3-tooltip message="tooltip"></d3-tooltip>
+        <d3-heatmap d3-click="moveTo(key)" d3-mouseover="showNetworkTooltip(key, value, 'Network Throughput')" 
+          d3-mouseout="hideTooltip()" d3-mousemove="moveTooltip(x,y)" 
+          val="network.heatmap" domain="0, 1024, 1048576" config="config">
+        </d3-heatmap>
+        <d3-legend limits="1024, 1048576" val="network.heatmap"></d3-legend>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,12 @@
+<div style="
+  position: fixed;
+  z-index: 10;
+  visibility: {{message.text && 'visible' || 'hidden'}};
+  left: {{message.x || 0}}px;
+  top: {{message.y + 10|| 0}}px
+">
+  <div class="mytooltip">
+    <div class="head">{{message.text}}</div>
+    <div ng-repeat="(name, value) in message.details">{{name}}: {{value}}</div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="&copy; DZ, 2013">
+  <title>Stats</title>
+
+  <!-- Le styles -->
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- libraries  -->
+  <script src="lib/jquery/jquery.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/d3.v3/d3.v3.js"></script>
+  <!-- Application scripts  -->
+  <script src="main.js"></script>
+  <script src="apps/helpers.js"></script>
+  <script src="apps/dashboard.js"></script>
+  <script src="apps/details.js"></script>
+  <script src="directives/speedometer.js"></script>
+  <script src="directives/donut.js"></script>
+  <script src="directives/heatmap.js"></script>
+  <script src="directives/barchart.js"></script>
+  <script src="directives/timeseries.js"></script>
+  <script src="apps/tooltip.js"></script>
+  <script src="apps/legend.js"></script>
+  <script src="apps/logger.js"></script>
+</head>
+
+<body ng-app="main" ng-controller="MainCtrl">
+  
+  <div class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="brand" href="#">StackStorm</a>
+        <ul class="nav">
+          <li ng-class="{active:isActiveLocation('/dashboard')}">
+            <a href="#/dashboard">Dashboard</a>
+          </li>
+          <li ng-class="{active:isActiveLocation('/details/'+root.context.host)}" ng-show="root.context.host">
+            <span>
+              <a href={{"#/details/"+root.context.host}}> {{ context.host }}</a>
+              <a href={{config["cgp-url"]+"/host.php?h="+root.context.host}} target="cgp"><i class="icon-share icon-white"></i></a>
+            </span>
+          </li>
+        </ul>
+        <p class="navbar-text pull-right timestamp"><ss-logger></ss-logger></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row-fluid main" ng-view>
+    <!-- Angular views GO HERE -->
+  </div>
+</body>
+</html>

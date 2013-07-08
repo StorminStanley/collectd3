@@ -1,0 +1,99 @@
+<div>
+  <div class="details row-fluid">
+    
+    <div class="left-canvas">
+      
+      <div class="load">
+        <p class="name">Load</p>
+        <d3-speedometer val="info.load.longterm | number:2" title="15 mins" class="chart"></d3-speedometer>
+       
+        <!-- TODO: put short/mid term numbers at the bottom of speedometer
+        <div class="kpi-group">
+          <p>{{info.load.shortterm | number:2}}<span class="stat-label"> 1 min</span></p>
+          <p>{{info.load.midterm | number:2}}<span class="stat-label"> 5 mins</span></p>
+        </div> 
+        -->
+
+        <div class="vcpu">
+          <p class="stats">{{info.vcpu.length}}<span class="stat-label"> vCPUs</span></p>
+          <!-- <d3-legend limits="0.5, 0.8" val="info.vcpu" class="numbers"></d3-legend> -->
+          <d3-bar-chart val="info.vcpu" class="chart" domain="0,1"></d3-bar-chart>
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="right-canvas"> 
+
+      <div class="memory">
+        <p class="name">Memory</p>
+        <d3-donut val="info.memory" title="Used" class="chart"></d3-donut>
+        <div class="kpi-group">
+          <!-- TODO: add total number -->
+          <p>{{bytesToSize(info.memory.free.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.free.value).multi}} Total</span></p>          
+          <p>{{bytesToSize(info.memory.free.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.free.value).multi}} Free</span></p>
+          <p class="sub-stats">{{bytesToSize(info.memory.buffered.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.buffered.value).multi}} Buffered</span></p>
+          <p class="sub-stats">{{bytesToSize(info.memory.cached.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.cached.value).multi}} Cached</span></p>
+        </div>         
+      </div>
+
+    </div>   
+  </div>
+  
+  <div class="details details-2 row-fluid">
+      <div class="left-canvas">
+        <div class="throughput">
+          <p class="name">Network I/O<br><span class="sub-name">last 24 hrs</span></p>  
+              <div class="kpi-group">
+                <p>{{bytesToSize(info.networkio.average).value}}<span class="unit"> {{bytesToSize(info.networkio.average).multi}}</span></p>
+                <p class="stat-label">avg. octets</p>
+              </div>
+              <div class="kpi-group">
+                <p>{{bytesToSize(info.networkio.peak).value}}<span class="unit"> {{bytesToSize(info.networkio.peak).multi}}</span></p>
+                <p class="stat-label">peak octets</p>
+              </div>
+              <div class="kpi-group right">
+                <p>{{info.networkio.errors}}<span class="unit"></span></p>
+                <p class="stat-label">errors</p>
+              </div>
+        </div>
+      </div>
+      <div class="left-canvas middle-canvas">
+        <div class="storage" ng-show="info.storage.used && info.storage.free">
+          <p class="name">Storage Capacity<br><span class="sub-name">{{info.storage.name}}</span></p>
+          <div class="stats">
+            <span class="stat-label">Total </span> {{bytesToSize(info.storage.used + info.storage.free).value}}<span class="stat-label"> {{bytesToSize(info.storage.used + info.storage.free).multi}}</span>
+          </div>
+          <div class="bars">
+            <div class="usage" ng-style="{ width: 365*info.storage.used/(info.storage.used+info.storage.free)+'px' }"><p class="bar">{{bytesToSize(info.storage.used).value}}<span class="unit"> {{bytesToSize(info.storage.used).multi}}</span></p><p class="stat-label">Committed</p></div>
+            <div class="free" ng-style="{ width: 365*info.storage.free/(info.storage.used+info.storage.free)+'px' }"><p class="bar">{{bytesToSize(info.storage.free).value}}<span class="unit"> {{bytesToSize(info.storage.free).multi}}</span></p><p class="stat-label">Free</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="right-canvas">
+        <div class="throughput">
+          <p class="name">Storage I/O<br><span class="sub-name">last 24 hrs</span></p>  
+           <div class="kpi-group">
+              <p>{{bytesToSize(info.storageio.average).value}}<span class="unit"> {{bytesToSize(info.storageio.average).multi}}</span></p>
+              <p class="stat-label">avg. octets</p>
+            </div>
+            <div class="kpi-group right">
+              <p>{{bytesToSize(info.storageio.peak).value}}<span class="unit"> {{bytesToSize(info.storageio.peak).multi}}</span></p>
+              <p class="stat-label">peak octets</p>
+            </div>               
+        </div>
+      </div>        
+  </div>
+
+  <div class="timeline">
+    <div class="periods">
+      <span class="period" ng-click="period = 'day'" ng-class="(period == 'day') && 'active'">D</span>
+      <span class="period" ng-click="period = 'week'" ng-class="(period == 'week') && 'active'">W</span>
+      <span class="period" ng-click="period = 'month'" ng-class="(period == 'month') && 'active'">M</span>
+    </div>
+    <d3-tooltip message="tooltip"></d3-tooltip>
+    <d3-timeseries val="graph" scheme="load memory storage network" period="period" 
+      d3-mouseover="showTooltip(time, data)" 
+      d3-mouseout="hideTooltip()" d3-mousemove="moveTooltip(x,y)" ></d3-timeseries>
+  </div>
+</div>
