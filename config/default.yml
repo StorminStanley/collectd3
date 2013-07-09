@@ -17,6 +17,10 @@ server:
   # Log info
   # When false, suppress output of console.info
   log-info: false
+  # Last timestamp
+  # We need this on development to display meaningful data on offline rrd files. On real-time system
+  # it should be set to false
+  last-timestamp: 1370643660
 
 # Client configuration
 # --------------------
