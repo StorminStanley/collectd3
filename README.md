@@ -31,6 +31,11 @@ If you want specific section to be handled as-is and prevent it from being overr
 
 For more info, see comments in default.yml and [YAML documentation](http://www.yaml.org/spec/1.2/spec.html)
 
+## Sample data
+When developing, testing, or trying this out, work with sample data.
+* Download the sampledata(https://s3-us-west-1.amazonaws.com/stackstorm/collectd3-sampledata/sampledata.zip), unzip and place under collectd3 (or place anywhere and adjust the data-ditectory in config)
+* In config, uncomment ```last-timestamp: 1370643660``` in the server section
+
 ## Run server
 
 You can start server:
@@ -48,3 +53,5 @@ You can start server:
 		$ node_modules/.bin/grunt
 
 If you use grunt, it will watch for changes and recompile, lint and unit-test each file you change. If you use ```npm start```, you need to do it manually (except for less files, they would be recompiled before each start).
+
+

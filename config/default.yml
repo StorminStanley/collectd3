@@ -17,10 +17,11 @@ server:
   # Log info
   # When false, suppress output of console.info
   log-info: false
-  # Last timestamp
-  # We need this on development to display meaningful data on offline rrd files. On real-time system
-  # it should be set to false
-  last-timestamp: 1370643660
+  # Last timestamp -for testing with sample data
+  # Download the sampledata from https://s3-us-west-1.amazonaws.com/stackstorm/collectd3-sampledata/sampledata.zip
+  # unzip, update the data-directory accordingly,
+  # uncomment next line: <last-timestamp: 1370643660>
+  # last-timestamp: 1370643660
 
 # Client configuration
 # --------------------
