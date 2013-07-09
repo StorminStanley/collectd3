@@ -33,3 +33,4 @@ app.get('/data/:id/graph', require('./lib/hostgraph.js'));
 app.listen(config.port);
 console.log('Express listening on port ' + config.port);
 console.log('Serving static content from: ' + __dirname + '/' + config['static-directory']);
+console.log('Serving sample data from: ' + __dirname + '/' + config['data-directory']);

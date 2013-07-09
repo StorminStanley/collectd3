@@ -1,5 +1,5 @@
 <div>
-  <div class="details row-fluid">
+  <div class="details row-fluid" ng-show="info">
     
     <div class="left-canvas">
       
@@ -29,8 +29,14 @@
         <p class="name">Memory</p>
         <d3-donut val="info.memory" title="Used" class="chart"></d3-donut>
         <div class="kpi-group">
-          <!-- TODO: add total number -->
-          <p>{{bytesToSize(info.memory.free.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.free.value).multi}} Total</span></p>          
+          <p>
+            {{bytesToSize(info.memory.free.value + info.memory.used.value +
+              info.memory.buffered.value + info.memory.cached.value).value }}
+            <span class="stat-label"> 
+                {{bytesToSize(info.memory.free.value + info.memory.used.value +
+                  info.memory.buffered.value + info.memory.cached.value).multi}} Total
+            </span>
+          </p>          
           <p>{{bytesToSize(info.memory.free.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.free.value).multi}} Free</span></p>
           <p class="sub-stats">{{bytesToSize(info.memory.buffered.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.buffered.value).multi}} Buffered</span></p>
           <p class="sub-stats">{{bytesToSize(info.memory.cached.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.cached.value).multi}} Cached</span></p>
@@ -40,7 +46,7 @@
     </div>   
   </div>
   
-  <div class="details details-2 row-fluid">
+  <div class="details details-2 row-fluid" ng-show="info">
       <div class="left-canvas">
         <div class="throughput">
           <p class="name">Network I/O<br><span class="sub-name">last 24 hrs</span></p>  
@@ -85,7 +91,7 @@
       </div>        
   </div>
 
-  <div class="timeline">
+  <div class="timeline" ng-show="graph">
     <div class="periods">
       <span class="period" ng-click="period = 'day'" ng-class="(period == 'day') && 'active'">D</span>
       <span class="period" ng-click="period = 'week'" ng-class="(period == 'week') && 'active'">W</span>
