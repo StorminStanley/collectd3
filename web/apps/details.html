@@ -1,5 +1,5 @@
 <div>
-  <div class="details row-fluid">
+  <div class="details row-fluid" ng-show="info">
     
     <div class="left-canvas">
       
@@ -46,7 +46,7 @@
     </div>   
   </div>
   
-  <div class="details details-2 row-fluid">
+  <div class="details details-2 row-fluid" ng-show="info">
       <div class="left-canvas">
         <div class="throughput">
           <p class="name">Network I/O<br><span class="sub-name">last 24 hrs</span></p>  
@@ -91,7 +91,7 @@
       </div>        
   </div>
 
-  <div class="timeline">
+  <div class="timeline" ng-show="graph">
     <div class="periods">
       <span class="period" ng-click="period = 'day'" ng-class="(period == 'day') && 'active'">D</span>
       <span class="period" ng-click="period = 'week'" ng-class="(period == 'week') && 'active'">W</span>
