@@ -8,13 +8,10 @@ function DashboardCtrl($s, $root, $http, $location, helpers, $log) {
 
   $s.switchCard = function (name) {
     $s.card = $root.card = name;
+    $s.fetchView(name);
   };
 
   $s.card = $root.card || "load";
-
-  $root.$watch('card', function () {
-    $s.fetchView($s.card);
-  });
   
   $s.statusOf = helpers.statusOf;
   
@@ -91,6 +88,7 @@ function DashboardCtrl($s, $root, $http, $location, helpers, $log) {
 
   $log.resetTime();
   $s.fetch();
+  $s.fetchView($s.card);
 
 }
 
