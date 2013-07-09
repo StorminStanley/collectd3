@@ -29,8 +29,14 @@
         <p class="name">Memory</p>
         <d3-donut val="info.memory" title="Used" class="chart"></d3-donut>
         <div class="kpi-group">
-          <!-- TODO: add total number -->
-          <p>{{bytesToSize(info.memory.free.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.free.value).multi}} Total</span></p>          
+          <p>
+            {{bytesToSize(info.memory.free.value + info.memory.used.value +
+              info.memory.buffered.value + info.memory.cached.value).value }}
+            <span class="stat-label"> 
+                {{bytesToSize(info.memory.free.value + info.memory.used.value +
+                  info.memory.buffered.value + info.memory.cached.value).multi}} Total
+            </span>
+          </p>          
           <p>{{bytesToSize(info.memory.free.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.free.value).multi}} Free</span></p>
           <p class="sub-stats">{{bytesToSize(info.memory.buffered.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.buffered.value).multi}} Buffered</span></p>
           <p class="sub-stats">{{bytesToSize(info.memory.cached.value).value}}<span class="stat-label"> {{bytesToSize(info.memory.cached.value).multi}} Cached</span></p>
