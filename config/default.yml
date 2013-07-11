@@ -21,7 +21,7 @@ server:
   # Download the sampledata from https://s3-us-west-1.amazonaws.com/stackstorm/collectd3-sampledata/sampledata.zip
   # unzip, update the data-directory accordingly,
   # uncomment next line: <last-timestamp: 1370643660>
-  # last-timestamp: 1370643660
+  last-timestamp: 1370643660
 
 # Client configuration
 # --------------------
@@ -52,10 +52,15 @@ client:
       disks:
         - md0
         - md2
+    uglyduckling:
+      host: ^ua-c05
+      partition: root
     compute:
       name: Compute nodes
       host: ^u[a,s]-c
-      partition: var-lib-nova-instances
+      partition: 
+        - var-lib-nova-instances
+        - root
       disks:
         - md0
         - md2

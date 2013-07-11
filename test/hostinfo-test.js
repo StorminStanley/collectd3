@@ -77,8 +77,8 @@ describe('Host Info', function () {
       it('should have certain structure', function (next) {
         var expected = function (data) {
           expect(data).to.have.property('storage');
-          expect(data.storage).to.be.an('object');
-          expect(data.storage).to.only.have.keys('name', 'used', 'free', 'last_update');
+          expect(data.storage).to.be.an('array');
+          expect(data.storage[0]).to.only.have.keys('name', 'used', 'free', 'last_update');
           next();
         };
         hostInfo(req, res(expected), next);
@@ -86,10 +86,10 @@ describe('Host Info', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.storage.name).to.be('root');
-          expect(data.storage.used).to.be(10773864448);
-          expect(data.storage.free).to.be(31467298816);
-          expect(data.storage.last_update).to.be(1370643659);
+          expect(data.storage[0].name).to.be('root');
+          expect(data.storage[0].used).to.be(10773864448);
+          expect(data.storage[0].free).to.be(31467298816);
+          expect(data.storage[0].last_update).to.be(1370643659);
           next();
         };
         hostInfo(req, res(expected), next);

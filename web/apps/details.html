@@ -64,31 +64,35 @@
         </div>
       </div>
       <div class="left-canvas middle-canvas">
-        <div class="storage" ng-show="info.storage.used && info.storage.free">
-          <p class="name">Storage Capacity<br><span class="sub-name">{{info.storage.name}}</span></p>
-          <div class="stats">
-            <span class="stat-label">Total </span> {{bytesToSize(info.storage.used + info.storage.free).value}}<span class="stat-label"> {{bytesToSize(info.storage.used + info.storage.free).multi}}</span>
-          </div>
-          <div class="bars">
-            <div class="usage" ng-style="{ width: 365*info.storage.used/(info.storage.used+info.storage.free)+'px' }">
-              <div class="bar">
-                <p class="number">
-                  {{bytesToSize(info.storage.used).value}}
-                  <span class="unit"> {{bytesToSize(info.storage.used).multi}}</span>
-                </p>
-              </div>
-              <p class="stat-label">Committed</p>
+        <div class="storage" ng-show="info.storage.length">
+          <p class="name">Storage Capacity</p>
+          
+          <div class="partition" ng-repeat="disk in info.storage" ng-show="disk.used && disk.free">
+            <div class="stats">
+              <span class="sub-name">{{disk.name}}</span><span class="stat-label">Total </span> {{bytesToSize(disk.used + disk.free).value}}<span class="stat-label"> {{bytesToSize(disk.used + disk.free).multi}}</span>
             </div>
-            <div class="free" ng-style="{ width: 365*info.storage.free/(info.storage.used+info.storage.free)+'px' }">
-              <div class="bar">
-                <p class="number">
-                  {{bytesToSize(info.storage.free).value}}
-                  <span class="unit"> {{bytesToSize(info.storage.free).multi}}</span>
-                </p>
+            <div class="bars">
+              <div class="usage" ng-style="{ width: 365*disk.used/(disk.used+disk.free)+'px' }">
+                <div class="bar">
+                  <p class="number">
+                    {{bytesToSize(disk.used).value}}
+                    <span class="unit"> {{bytesToSize(disk.used).multi}}</span>
+                  </p>
+                </div>
+                <p class="stat-label">Committed</p>
               </div>
-              <p class="stat-label">Free</p>
+              <div class="free" ng-style="{ width: 365*disk.free/(disk.used+disk.free)+'px' }">
+                <div class="bar">
+                  <p class="number">
+                    {{bytesToSize(disk.free).value}}
+                    <span class="unit"> {{bytesToSize(disk.free).multi}}</span>
+                  </p>
+                </div>
+                <p class="stat-label">Free</p>
+              </div>
             </div>
           </div>
+          
         </div>
       </div>
       <div class="right-canvas">

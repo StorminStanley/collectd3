@@ -9,7 +9,6 @@
   .left-canvas {
     float: left;
     width: 60%;
-    height: 285px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     border-width: 0;
@@ -31,8 +30,7 @@
   
   .name {
     font-size: 2em;
-    margin-left: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     color: @label-gray;
     line-height: 150%;
   }
@@ -155,7 +153,6 @@
 
   .left-canvas {
     width: 33%;
-    height: 220px;
     -o-border-image: -o-linear-gradient(bottom, #EEE 0%, @label-gray 60%, #EEE 100%) 1 100%;
     -moz-border-image: -moz-linear-gradient(bottom, #EEE 0%, @label-gray 60%, #EEE 100%) 1 100%;
     -ms-border-image: -ms-linear-gradient(bottom, #EEE 0%, @label-gray 60%, #EEE 100%) 1 100%;
@@ -207,6 +204,12 @@
       font-size: 3.5em;
       height: 30px;
       text-align: right;
+    }
+    
+    .sub-name {
+      position: absolute;
+      left: 0;
+      bottom: 4px;
     }
     
     .bars {
