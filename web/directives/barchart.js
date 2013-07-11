@@ -13,12 +13,6 @@ angular.module('main')
           , bars;
 
         scope.$watch('val', function (val) {
-          var colorScale = d3.scale.quantize()
-              .domain(scope.domain.split(',').map(function (e) {
-                return parseFloat(e, 10);
-              }))
-              .range(d3.range(10).map(function (d) { return "cell" + d; }));
-
           if (!val) {
             return;
           }
@@ -26,20 +20,20 @@ angular.module('main')
           bars = vis.selectAll("div")
               .data(val);
 
-          bars.enter().append("div")
-            .attr("class", "bar")
-            .append("div")
-            .attr("class", function (d) {
-              var classes = ["used"];
-              if (d !== null) {
-                classes.push(colorScale(d.value));
-              }
-              return classes.join(" ");
-            })
+          var bar = bars.enter().append("div")
+            .attr("class", "bar");
+          
+          bar.append("div")
+            .attr("class", "used")
             .style("height", function (d) {
-              return (d.value * 100).toFixed(0) + "px";
+              return d.used * 100 + "%";
             });
-            //.style("width", "10px");
+            
+          bar.append("div")
+            .attr("class", "wait")
+            .style("height", function (d) {
+              return d.wait * 100 + "%";
+            });
         });
           
       }

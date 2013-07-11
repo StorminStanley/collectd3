@@ -16,7 +16,6 @@
 
         <div class="vcpu">
           <p class="stats">{{info.vcpu.length}}<span class="stat-label"> vCPUs</span></p>
-          <!-- <d3-legend limits="0.5, 0.8" val="info.vcpu" class="numbers"></d3-legend> -->
           <d3-bar-chart val="info.vcpu" class="chart" domain="0,1"></d3-bar-chart>
         </div>
       </div>
@@ -51,7 +50,7 @@
         <div class="throughput">
           <p class="name">Network I/O<br><span class="sub-name">last 24 hrs</span></p>  
               <div class="kpi-group">
-                <p>{{bytesToSize(info.networkio.average).value}}<span class="unit"> {{bytesToSize(info.networkio.average).multi}}</span></p>
+                <p class="{{ statusOf( 'network', info.networkio.average ).status }}">{{bytesToSize(info.networkio.average).value}}<span class="unit"> {{bytesToSize(info.networkio.average).multi}}</span></p>
                 <p class="stat-label">avg. octets</p>
               </div>
               <div class="kpi-group">
@@ -71,8 +70,24 @@
             <span class="stat-label">Total </span> {{bytesToSize(info.storage.used + info.storage.free).value}}<span class="stat-label"> {{bytesToSize(info.storage.used + info.storage.free).multi}}</span>
           </div>
           <div class="bars">
-            <div class="usage" ng-style="{ width: 365*info.storage.used/(info.storage.used+info.storage.free)+'px' }"><p class="bar">{{bytesToSize(info.storage.used).value}}<span class="unit"> {{bytesToSize(info.storage.used).multi}}</span></p><p class="stat-label">Committed</p></div>
-            <div class="free" ng-style="{ width: 365*info.storage.free/(info.storage.used+info.storage.free)+'px' }"><p class="bar">{{bytesToSize(info.storage.free).value}}<span class="unit"> {{bytesToSize(info.storage.free).multi}}</span></p><p class="stat-label">Free</p></div>
+            <div class="usage" ng-style="{ width: 365*info.storage.used/(info.storage.used+info.storage.free)+'px' }">
+              <div class="bar">
+                <p class="number">
+                  {{bytesToSize(info.storage.used).value}}
+                  <span class="unit"> {{bytesToSize(info.storage.used).multi}}</span>
+                </p>
+              </div>
+              <p class="stat-label">Committed</p>
+            </div>
+            <div class="free" ng-style="{ width: 365*info.storage.free/(info.storage.used+info.storage.free)+'px' }">
+              <div class="bar">
+                <p class="number">
+                  {{bytesToSize(info.storage.free).value}}
+                  <span class="unit"> {{bytesToSize(info.storage.free).multi}}</span>
+                </p>
+              </div>
+              <p class="stat-label">Free</p>
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +95,7 @@
         <div class="throughput">
           <p class="name">Storage I/O<br><span class="sub-name">last 24 hrs</span></p>  
            <div class="kpi-group">
-              <p>{{bytesToSize(info.storageio.average).value}}<span class="unit"> {{bytesToSize(info.storageio.average).multi}}</span></p>
+              <p class="{{ statusOf( 'storage', info.storageio.average ).status }}">{{bytesToSize(info.storageio.average).value}}<span class="unit"> {{bytesToSize(info.storageio.average).multi}}</span></p>
               <p class="stat-label">avg. octets</p>
             </div>
             <div class="kpi-group right">

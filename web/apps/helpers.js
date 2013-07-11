@@ -19,6 +19,10 @@ angular.module('main')
         return { status: 'normal' };
       } else if (type === 'network-errors') {
         return value ? { status: 'warning', text: 'errors' } : { status: 'normal' };
+      } else if (type === 'network' || type === 'storage') {
+        if (value > 1024 * 1024) { return { status: 'warning', text: 'busy' }; }
+        if (value > 512 * 1024) { return { status: 'attention', text: 'warming' }; }
+        return { status: 'normal' };
       } else {
         if (value > 95) { return { status: 'warning', text: 'run out' }; }
         if (value > 80) { return { status: 'attention', text: 'running out' }; }
