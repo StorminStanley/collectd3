@@ -4,7 +4,7 @@ function DetailsCtrl($s, $http, $routeParams, helpers, $filter, $log) {
 
   $s.$routeParams = $routeParams;
   $s.bytesToSize = helpers.bytesToSize;
-
+  $s.statusOf = helpers.statusOf;
   $s.countByTemp = helpers.countByTemp;
 
   $s.x = 0;

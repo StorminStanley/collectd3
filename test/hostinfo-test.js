@@ -103,6 +103,7 @@ describe('Host Info', function () {
           expect(data).to.have.property('vcpu');
           expect(data.vcpu).to.be.an('array');
           expect(data.vcpu).to.have.length(2);
+          expect(data.vcpu[1]).to.only.have.keys('used', 'wait');
           next();
         };
         hostInfo(req, res(expected), next);
@@ -110,8 +111,10 @@ describe('Host Info', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.vcpu[0].value).to.be(0.10110609675666826);
-          expect(data.vcpu[1].value).to.be(0.10110609675666826);
+          expect(data.vcpu[0].used).to.be(0.10110609675666826);
+          expect(data.vcpu[0].wait).to.be(0.0839165778072441);
+          expect(data.vcpu[1].used).to.be(0.10110609675666826);
+          expect(data.vcpu[0].wait).to.be(0.0839165778072441);
           next();
         };
         hostInfo(req, res(expected), next);
