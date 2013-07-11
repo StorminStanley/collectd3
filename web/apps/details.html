@@ -71,8 +71,24 @@
             <span class="stat-label">Total </span> {{bytesToSize(info.storage.used + info.storage.free).value}}<span class="stat-label"> {{bytesToSize(info.storage.used + info.storage.free).multi}}</span>
           </div>
           <div class="bars">
-            <div class="usage" ng-style="{ width: 365*info.storage.used/(info.storage.used+info.storage.free)+'px' }"><p class="bar">{{bytesToSize(info.storage.used).value}}<span class="unit"> {{bytesToSize(info.storage.used).multi}}</span></p><p class="stat-label">Committed</p></div>
-            <div class="free" ng-style="{ width: 365*info.storage.free/(info.storage.used+info.storage.free)+'px' }"><p class="bar">{{bytesToSize(info.storage.free).value}}<span class="unit"> {{bytesToSize(info.storage.free).multi}}</span></p><p class="stat-label">Free</p></div>
+            <div class="usage" ng-style="{ width: 365*info.storage.used/(info.storage.used+info.storage.free)+'px' }">
+              <div class="bar">
+                <p class="number">
+                  {{bytesToSize(info.storage.used).value}}
+                  <span class="unit"> {{bytesToSize(info.storage.used).multi}}</span>
+                </p>
+              </div>
+              <p class="stat-label">Committed</p>
+            </div>
+            <div class="free" ng-style="{ width: 365*info.storage.free/(info.storage.used+info.storage.free)+'px' }">
+              <div class="bar">
+                <p class="number">
+                  {{bytesToSize(info.storage.free).value}}
+                  <span class="unit"> {{bytesToSize(info.storage.free).multi}}</span>
+                </p>
+              </div>
+              <p class="stat-label">Free</p>
+            </div>
           </div>
         </div>
       </div>
