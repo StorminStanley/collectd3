@@ -1,7 +1,7 @@
 server:
   data-directory: testdata
   log-info: false
-  last-timestamp: 1370643660
+  last-timestamp: 1370643000
 
 client:
   ~override: true

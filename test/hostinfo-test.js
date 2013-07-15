@@ -8,7 +8,7 @@ describe('Host Info', function () {
       res = function (callback) {
         return { json: callback };
       },
-      req = { params: { id: 'localhost' }};
+      req = { params: { id: 'localhost' }, query: {} };
 
   describe('Interface callback', function () {
 
@@ -30,7 +30,7 @@ describe('Host Info', function () {
         var expected = function (data) {
           expect(data).to.have.property('load');
           expect(data.load).to.be.an('object');
-          expect(data.load).to.only.have.keys('shortterm', 'midterm', 'longterm', 'last_update');
+          expect(data.load).to.only.have.keys('shortterm', 'midterm', 'longterm', '_time');
           next();
         };
         hostInfo(req, res(expected), next);
@@ -38,10 +38,10 @@ describe('Host Info', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.load.shortterm).to.be(0.365);
-          expect(data.load.midterm).to.be(0.445);
-          expect(data.load.longterm).to.be(0.545);
-          expect(data.load.last_update).to.be(1370643146);
+          expect(data.load.shortterm).to.be(0.49000000000000005);
+          expect(data.load.midterm).to.be(0.49499999999999994);
+          expect(data.load.longterm).to.be(0.575);
+          expect(data.load._time).to.be(1370643000);
           next();
         };
         hostInfo(req, res(expected), next);
@@ -62,9 +62,9 @@ describe('Host Info', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.memory.used.value).to.be(20274995200);
-          expect(data.memory.free.value).to.be(19360100352);
-          expect(data.memory.cached.value).to.be(61302149120);
+          expect(data.memory.used.value).to.be(20272826777.6);
+          expect(data.memory.free.value).to.be(19365131878.4);
+          expect(data.memory.cached.value).to.be(61303603200);
           expect(data.memory.buffered.value).to.be(434384896);
           next();
         };
@@ -78,7 +78,7 @@ describe('Host Info', function () {
         var expected = function (data) {
           expect(data).to.have.property('storage');
           expect(data.storage).to.be.an('array');
-          expect(data.storage[0]).to.only.have.keys('name', 'used', 'free', 'last_update');
+          expect(data.storage[0]).to.only.have.keys('name', 'used', 'free', '_time');
           next();
         };
         hostInfo(req, res(expected), next);
@@ -87,9 +87,9 @@ describe('Host Info', function () {
       it('should return correct values', function (next) {
         var expected = function (data) {
           expect(data.storage[0].name).to.be('root');
-          expect(data.storage[0].used).to.be(10773864448);
-          expect(data.storage[0].free).to.be(31467298816);
-          expect(data.storage[0].last_update).to.be(1370643659);
+          expect(data.storage[0].used).to.be(10775152640);
+          expect(data.storage[0].free).to.be(31466010624);
+          expect(data.storage[0]._time).to.be(1370643000);
           next();
         };
         hostInfo(req, res(expected), next);
@@ -103,7 +103,7 @@ describe('Host Info', function () {
           expect(data).to.have.property('vcpu');
           expect(data.vcpu).to.be.an('array');
           expect(data.vcpu).to.have.length(2);
-          expect(data.vcpu[1]).to.only.have.keys('used', 'wait');
+          expect(data.vcpu[1]).to.only.have.keys('used', 'wait', '_id');
           next();
         };
         hostInfo(req, res(expected), next);
@@ -111,10 +111,10 @@ describe('Host Info', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.vcpu[0].used).to.be(0.10110609675666826);
-          expect(data.vcpu[0].wait).to.be(0.0839165778072441);
-          expect(data.vcpu[1].used).to.be(0.10110609675666826);
-          expect(data.vcpu[0].wait).to.be(0.0839165778072441);
+          expect(data.vcpu[0].used).to.be(0.19885894200924448);
+          expect(data.vcpu[0].wait).to.be(0.09075988656409797);
+          expect(data.vcpu[1].used).to.be(0.19885894200924448);
+          expect(data.vcpu[1].wait).to.be(0.09075988656409797);
           next();
         };
         hostInfo(req, res(expected), next);

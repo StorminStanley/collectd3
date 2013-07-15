@@ -32,7 +32,8 @@ angular.module('main')
         period: '=',
         d3Mouseover: '&',
         d3Mouseout: '&',
-        d3Mousemove: '&'
+        d3Mousemove: '&',
+        d3Click: '&'
       },
       link: function postLink(scope, element) {
         var vis = d3.select(element[0]).append("svg:svg")
@@ -105,6 +106,9 @@ angular.module('main')
             })
             .on("mousemove", function () {
               scope.d3Mousemove({x: event.x, y: event.y});
+            })
+            .on("click", function (d) {
+              scope.d3Click({ time: d[0] });
             });
 
           medians.append('svg:line')

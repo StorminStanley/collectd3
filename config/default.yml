@@ -21,7 +21,7 @@ server:
   # Download the sampledata from https://s3-us-west-1.amazonaws.com/stackstorm/collectd3-sampledata/sampledata.zip
   # unzip, update the data-directory accordingly,
   # uncomment next line: <last-timestamp: 1370643660>
-  last-timestamp: 1370643660
+  last-timestamp: 1370643000 #1373496205
 
 # Client configuration
 # --------------------

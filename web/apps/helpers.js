@@ -10,7 +10,8 @@ angular.module('main')
         i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
       }
       var value = bytes / Math.pow(1024, i);
-      return { value: value.toFixed(3 - value.toString().split('.')[0].length), multi: sizes[i] };
+      var precision = 3 - value.toString().split('.')[0].length;
+      return { value: value.toFixed(precision < 0 ? 0 : precision), multi: sizes[i] };
     },
     statusOf: function (type, value) {
       if (type === 'load') {

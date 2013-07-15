@@ -30,7 +30,7 @@ describe('Host Graph', function () {
         var expected = function (data) {
           expect(data).to.have.property('load');
           expect(data.load).to.have.length(173);
-          expect(data.load[1]).to.have.length(2);
+          expect(data.load[1]).to.have.length(4);
           next();
         };
         hostGraph(req, res(expected), next);
@@ -38,8 +38,8 @@ describe('Host Graph', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.load[1][0]).to.be(1370558000);
-          expect(data.load[1][1]).to.be(2.072);
+          expect(data.load[1][0]).to.be(1370557500);
+          expect(data.load[1][1]).to.be(1.316);
           next();
         };
         hostGraph(req, res(expected), next);
@@ -60,8 +60,8 @@ describe('Host Graph', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.memory[1][0]).to.be(1370558000);
-          expect(data.memory[1][1]).to.be(20.628898302047595);
+          expect(data.memory[1][0]).to.be(1370557500);
+          expect(data.memory[1][1]).to.be(20.599417219895916);
           next();
         };
         hostGraph(req, res(expected), next);
@@ -82,7 +82,7 @@ describe('Host Graph', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.storage[1][0]).to.be(1370558000);
+          expect(data.storage[1][0]).to.be(1370557500);
           expect(data.storage[1][1]).to.be(0);
           next();
         };
@@ -104,8 +104,8 @@ describe('Host Graph', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.network[1][0]).to.be(1370558000);
-          expect(data.network[1][1]).to.be(1115834.2532);
+          expect(data.network[1][0]).to.be(1370557500);
+          expect(data.network[1][1]).to.be(1093963.9952);
           expect(data.network[1][2]).to.be(0);
           next();
         };

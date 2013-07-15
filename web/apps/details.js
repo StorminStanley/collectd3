@@ -7,16 +7,16 @@ function DetailsCtrl($s, $http, $routeParams, helpers, $filter, $log) {
   $s.statusOf = helpers.statusOf;
   $s.countByTemp = helpers.countByTemp;
 
-  $s.x = 0;
-  $s.useMock = false;
   $s.period = 'day';
+  $s.time = null;
 
   $s.tooltip = {};
 
   $s.showTooltip = function (time, data) {
     $s.tooltip.text = $filter('date')(time * 1000, 'EEE, MMM d HH:mm');
     $s.tooltip.details = {
-      'Load': data.load && data.load[1] !== null ? data.load[1].toFixed(2) : "?",
+      'Load': data.load && data.load[1] !== null ?
+              data.load[1].toFixed(2) + ' (' + data.load[3].toFixed(2) + ')' : "?",
       'Memory %': data.memory && data.memory[1] !== null ? data.memory[1].toFixed(2) : "?",
       'Memory used': data.memory && data.memory[3] !== null ?
         helpers.bytesToSize(data.memory[3]).value + ' ' +
@@ -45,14 +45,17 @@ function DetailsCtrl($s, $http, $routeParams, helpers, $filter, $log) {
     $s.$apply();
   };
 
-  $s.fetch = function () {
-    // TODO: get the parameters from hour/3 hours/day/week/year selector
-    var params = { period: $s.period };
-    $log.time("Loading details data");
+  window.stTm = $s.setTime = function (time) {
+    $s.time = time;
+    $s.$apply();
+  };
 
-    var urlInfo = $s.useMock ? "/host-info.json"
-           : "/data/" + $routeParams.host + "/info";
-    $http.get(urlInfo)
+  $s.$watch('time', function () {
+    $log.resetTime();
+
+    $log.time("Loading details info");
+
+    $http.get("/data/" + $routeParams.host + "/info", { params: { time: $s.time } })
       .success(function (res) {
         $s.info = res;
         $log.time("Info data loaded");
@@ -62,9 +65,14 @@ function DetailsCtrl($s, $http, $routeParams, helpers, $filter, $log) {
         $log.time("Info data failed");
       });
 
-    var urlGraph = $s.useMock ? "/graph.json"
-          : "/data/" + $routeParams.host + "/graph";
-    $http.get(urlGraph, {params : params})
+  });
+
+  $s.$watch('period', function () {
+    $log.resetTime();
+
+    $log.time("Loading details graph");
+
+    $http.get("/data/" + $routeParams.host + "/graph", { params : { period: $s.period } })
       .success(function (res) {
         $s.graph = res;
         $log.time("Graph data loaded");
@@ -72,14 +80,7 @@ function DetailsCtrl($s, $http, $routeParams, helpers, $filter, $log) {
         $s.graph = {};
         $log.time("Graph data failed");
       });
-      
-  };
-
-  $s.$watch('period', function () {
-    $log.resetTime();
-    $s.fetch();
   });
-
 
 }
 
