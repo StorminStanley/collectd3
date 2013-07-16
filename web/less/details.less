@@ -122,12 +122,30 @@
       display: inline-block;
     
       .bar {
-        width: 8px;
-        margin-right: 2px;
+        width: 32px;
+        margin-right: 8px;
         position: relative;
         display: inline-block;
         height: 80px;
         background-color: #eee;
+        
+        &:first-of-type:nth-last-of-type(n+9),
+        &:first-of-type:nth-last-of-type(n+9) ~ .bar {
+          width: 16px;
+          margin-right: 4px;
+        }
+        
+        &:first-of-type:nth-last-of-type(n+17),
+        &:first-of-type:nth-last-of-type(n+17) ~ .bar {
+          width: 10px;
+          margin-right: 3px;
+        }
+        
+        &:first-of-type:nth-last-of-type(n+25),
+        &:first-of-type:nth-last-of-type(n+25) ~ .bar {
+          width: 8px;
+          margin-right: 2px;
+        }
       }
 
       .used, .wait {
