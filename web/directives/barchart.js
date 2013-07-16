@@ -17,20 +17,26 @@ angular.module('main')
             return;
           }
 
+          vis.selectAll("div").remove();
+          
           bars = vis.selectAll("div")
               .data(val);
 
           var bar = bars.enter().append("div")
             .attr("class", "bar");
-          
+
           bar.append("div")
-            .attr("class", "used")
+            .attr("class", "used");
+
+          bar.append("div")
+            .attr("class", "wait");
+
+          bars.selectAll(".used")
             .style("height", function (d) {
               return d.used * 100 + "%";
             });
-            
-          bar.append("div")
-            .attr("class", "wait")
+
+          bars.selectAll(".wait")
             .style("height", function (d) {
               return d.wait * 100 + "%";
             });
