@@ -116,6 +116,12 @@
       <span class="period" ng-click="period = 'week'" ng-class="(period == 'week') && 'active'">W</span>
       <span class="period" ng-click="period = 'month'" ng-class="(period == 'month') && 'active'">M</span>
     </div>
+    <div class="timestamp" ng-show="time">
+      <span class="stamp">
+        {{(time*1000)|date:'EEEE, MMMM d HH:mm'}}
+      </span>
+      <i class="icon icon-remove-circle icon-white" ng-click="time = null"></i>
+    </div>
     <d3-tooltip message="tooltip"></d3-tooltip>
     <d3-timeseries val="graph" scheme="load memory storage network" period="period" 
       d3-mouseover="showTooltip(time, data)" 

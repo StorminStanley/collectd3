@@ -285,7 +285,7 @@
   cursor: default;
   padding-top: 15px;
    
-  .periods {
+  .periods, .timestamp {
     position: absolute;
     top: -10px;
     left: 20px;
@@ -304,6 +304,18 @@
     
     &.active {
       color: #82c0d3;
+    }
+  }
+  
+  .timestamp {
+    top: -10px;
+    left: auto;
+    right: 20px;
+    color: #fff;
+    
+    .icon {
+      margin: 0 -5px 0 5px;
+      cursor: pointer;
     }
   }
   
