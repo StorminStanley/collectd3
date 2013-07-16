@@ -5,14 +5,13 @@
       
       <div class="load">
         <p class="name">Load</p>
-        <d3-speedometer val="info.load.longterm | number:2" title="15 mins" class="chart"></d3-speedometer>
+        <d3-speedometer val="(info.load.longterm / info.vcpu.length) | number:2" title="Normalized" class="chart"></d3-speedometer>
        
-        <!-- TODO: put short/mid term numbers at the bottom of speedometer
         <div class="kpi-group">
           <p>{{info.load.shortterm | number:2}}<span class="stat-label"> 1 min</span></p>
           <p>{{info.load.midterm | number:2}}<span class="stat-label"> 5 mins</span></p>
+          <p>{{info.load.longterm | number:2}}<span class="stat-label"> 15 mins</span></p>
         </div> 
-        -->
 
         <div class="vcpu">
           <p class="stats">{{info.vcpu.length}}<span class="stat-label"> vCPUs</span></p>

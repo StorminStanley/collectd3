@@ -38,9 +38,9 @@ describe('Host Info', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.load.shortterm).to.be(0.49000000000000005);
-          expect(data.load.midterm).to.be(0.49499999999999994);
-          expect(data.load.longterm).to.be(0.575);
+          expect(data.load.shortterm).to.be(0.9800000000000001);
+          expect(data.load.midterm).to.be(0.9899999999999999);
+          expect(data.load.longterm).to.be(1.15);
           expect(data.load._time).to.be(1370643000);
           next();
         };
