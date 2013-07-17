@@ -113,3 +113,46 @@ client:
     - control
     - nova
     - swift
+  levels:
+    load:
+      - level: 1
+        status: warning
+        text: busy
+      - level: 0.7
+        status: attention
+        text: warming
+      - level: 0
+        status: normal
+    network:
+      - level: 1048576
+        status: warning
+        text: busy
+      - level: 524288
+        status: attention
+        text: warming
+      - level: 0
+        status: normal
+    storage:
+      - level: 1048576
+        status: warning
+        text: busy
+      - level: 524288
+        status: attention
+        text: warming
+      - level: 0
+        status: normal
+    network-errors:
+      - level: 1
+        status: warning
+        text: errors
+      - level: 0
+        status: normal
+    default:
+      - level: 95
+        status: warning
+        text: run out
+      - level: 80
+        status: attention
+        text: runing out
+      - level: 0
+        status: normal

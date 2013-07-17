@@ -38,10 +38,10 @@ angular.module('main')
     $log.time("Loading Config data.");
     $http.get("/config")
       .success(function (res) {
-        $s.config = res;
+        $root.config = res;
         $log.time("Config data has been loaded.");
       }).error(function () {
-        $s.config = {};
+        $root.config = {};
         $log.time("Config data has been failed.");
       });
 

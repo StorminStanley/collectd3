@@ -2,32 +2,27 @@
 'use strict';
 
 angular.module('main')
-  .value('helpers', {
-    bytesToSize: function (bytes) {
-      var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'],
-          i = 0;
-      if (bytes >= 1) {
-        i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
+  .factory('helpers', ['$rootScope', function ($root) {
+    return {
+      bytesToSize: function (bytes) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'],
+            i = 0;
+        if (bytes >= 1) {
+          i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
+        }
+        var value = bytes / Math.pow(1024, i);
+        var precision = 3 - value.toString().split('.')[0].length;
+        return { value: value.toFixed(precision < 0 ? 0 : precision), multi: sizes[i] };
+      },
+      statusOf: function (type, value) {
+        var rules = $root.config.levels
+          , rule = rules[type] ? rules[type] : rules['default'];
+
+        for (var i = 0; i < rule.length; i++) {
+          if (rule[i].level <= value) {
+            return rule[i];
+          }
+        }
       }
-      var value = bytes / Math.pow(1024, i);
-      var precision = 3 - value.toString().split('.')[0].length;
-      return { value: value.toFixed(precision < 0 ? 0 : precision), multi: sizes[i] };
-    },
-    statusOf: function (type, value) {
-      if (type === 'load') {
-        if (value > 1) { return { status: 'warning', text: 'busy' }; }
-        if (value > 0.7) { return { status: 'attention', text: 'warming' }; }
-        return { status: 'normal' };
-      } else if (type === 'network-errors') {
-        return value ? { status: 'warning', text: 'errors' } : { status: 'normal' };
-      } else if (type === 'network' || type === 'storage') {
-        if (value > 1024 * 1024) { return { status: 'warning', text: 'busy' }; }
-        if (value > 512 * 1024) { return { status: 'attention', text: 'warming' }; }
-        return { status: 'normal' };
-      } else {
-        if (value > 95) { return { status: 'warning', text: 'run out' }; }
-        if (value > 80) { return { status: 'attention', text: 'running out' }; }
-        return { status: 'normal' };
-      }
-    }
-  });
+    };
+  }]);

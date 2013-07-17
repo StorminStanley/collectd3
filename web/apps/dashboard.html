@@ -61,9 +61,9 @@
       <div class="header">
         <p class="name">Storage</p>
         <div class="status-bar">
-          <p class="status">{{ statusOf( 'storage', aggregate.storage.allocated ).text }}</p>
+          <p class="status">{{ statusOf( 'storage', aggregate.storage.average ).text }}</p>
           <svg class="icon">
-            <circle class="{{ statusOf( 'storage', aggregate.storage.allocated ).status }}" cx="6" cy="6" r="6"></circle>
+            <circle class="{{ statusOf( 'storage', aggregate.storage.average ).status }}" cx="6" cy="6" r="6"></circle>
           </svg>
         </div>
       </div>
