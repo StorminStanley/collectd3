@@ -47,7 +47,7 @@
   <div class="details details-2 row-fluid" ng-show="info">
       <div class="left-canvas">
         <div class="throughput">
-          <p class="name">Network I/O<br><span class="sub-name">last 24 hrs</span></p>  
+          <p class="name">Network I/O</p>  
               <div class="kpi-group">
                 <p class="{{ statusOf( 'network', info.networkio.average ).status }}">{{bytesToSize(info.networkio.average).value}}<span class="unit"> {{bytesToSize(info.networkio.average).multi}}</span></p>
                 <p class="stat-label">avg. octets</p>
@@ -96,7 +96,7 @@
       </div>
       <div class="right-canvas">
         <div class="throughput">
-          <p class="name">Storage I/O<br><span class="sub-name">last 24 hrs</span></p>  
+          <p class="name">Storage I/O</p>  
            <div class="kpi-group">
               <p class="{{ statusOf( 'storage', info.storageio.average ).status }}">{{bytesToSize(info.storageio.average).value}}<span class="unit"> {{bytesToSize(info.storageio.average).multi}}</span></p>
               <p class="stat-label">avg. octets</p>

@@ -155,8 +155,8 @@ describe('Host Info', function () {
 
       it('should return correct values', function (next) {
         var expected = function (data) {
-          expect(data.networkio.average).to.be(3468687.1039241);
-          expect(data.networkio.peak).to.be(60239162.300000004);
+          expect(data.networkio.average).to.be(65968.94);
+          expect(data.networkio.peak).to.be(65968.94);
           expect(data.networkio.errors).to.be(0);
           next();
         };
