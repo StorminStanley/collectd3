@@ -55,7 +55,7 @@ function DetailsCtrl($s, $http, $routeParams, helpers, $filter, $log) {
 
     $log.time("Loading details info");
 
-    $http.get("/data/" + $routeParams.host + "/info", { params: { time: $s.time } })
+    $http.get("/data/" + $routeParams.host + "/info", { params: { time: $s.time, period: $s.period } })
       .success(function (res) {
         $s.info = res;
         $log.time("Info data loaded");
