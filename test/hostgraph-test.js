@@ -39,7 +39,7 @@ describe('Host Graph', function () {
       it('should return correct values', function (next) {
         var expected = function (data) {
           expect(data.load[1][0]).to.be(1370557500);
-          expect(data.load[1][1]).to.be(1.316);
+          expect(data.load[1][1]).to.be(1.146);
           next();
         };
         hostGraph(req, res(expected), next);
