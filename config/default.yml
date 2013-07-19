@@ -46,9 +46,9 @@ client:
       name: Storage nodes
       # Regular expression to match with hostname
       host: ^u[a,s]-s
-      # Partition to show at Details view
+      # Storage partition to show on Details view
       partition: root
-      # List of disks to calculate troughput of.
+      # List of disks to calculate troughput
       disks:
         - md0
         - md2
