@@ -54,6 +54,9 @@ When developing, testing, or trying this out, work with sample data.
 ## Run server
 
 		$ npm start
+This launches the server on the background; the output is redirected to server.out.log and server.err.log. To check server status, use [forever](https://github.com/nodejitsu/forever) - e.g., ```node_modules/forever/bin/forever list```. To stop the server:
+
+    $ npm stop
 
 ## Developing
 Always use grunt. It will watch for changes and recompile, lint and unit-test each file you change. If you use ```npm start```, you need to do it manually (except for less files, they would be recompiled before each start).
