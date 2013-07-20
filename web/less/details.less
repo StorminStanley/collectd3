@@ -1,4 +1,7 @@
+/* Colors */ 
 @label-gray: #CCC;
+@timelineControlFontColor: #888;
+@timelineControlFontColorActive: #82c0d3;
 
 .details {
   display: block;
@@ -311,10 +314,10 @@
     margin: -2px 6px;
     padding: 2px 4px;
     cursor: pointer;
-    color: #888;
+    color: @timelineControlFontColor;
     
     &.active {
-      color: #82c0d3;
+      color: @timelineControlFontColorActive;
     }
   }
   
@@ -322,11 +325,12 @@
     top: -10px;
     left: auto;
     right: 20px;
-    color: #fff;
+    color: @timelineControlFontColor;
     
     .icon {
-      margin: 0 -5px 0 5px;
+      margin: 0 0 0 5px;
       cursor: pointer;
+      color: @timelineControlFontColorActive;
     }
   }
   

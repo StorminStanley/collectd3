@@ -23,7 +23,8 @@ angular.module('main')
       restrict: 'E',
       scope: {
         val: '=',
-        title: '@'
+        title: '@',
+        subtitle: '@'
       },
       link: function postLink(scope, element) {
         var svg = d3.select(element[0]).append("svg:svg")
@@ -67,6 +68,12 @@ angular.module('main')
             .attr("text-anchor", "middle")
             .attr("class", "chart-label")
             .text(scope.title);
+
+          ctrGroup.append("svg:text")
+            .attr("dy", "4.2em")
+            .attr("text-anchor", "middle")
+            .attr("class", "chart-label")
+            .text(scope.subtitle);
 
         });
       }

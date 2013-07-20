@@ -115,14 +115,14 @@ angular.module('main')
             .attr("class", "meridian-bg")
             .attr("x1", function (d) { return x(d[0]); })
             .attr("x2", function (d) { return x(d[0]); })
-            .attr("y1", margin.vertical)
+            .attr("y1", 0)
             .attr("y2", scope.scheme.split(" ").length * h);
 
           medians.append('svg:line')
             .attr("class", "meridian")
             .attr("x1", function (d) { return x(d[0]); })
             .attr("x2", function (d) { return x(d[0]); })
-            .attr("y1", margin.vertical)
+            .attr("y1", 0)
             .attr("y2", scope.scheme.split(" ").length * h);
 
           var time = d3.time.scale()

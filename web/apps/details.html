@@ -5,7 +5,7 @@
       
       <div class="load">
         <p class="name">Load</p>
-        <d3-speedometer val="(info.load.longterm / info.vcpu.length) | number:2" title="Normalized" class="chart"></d3-speedometer>
+        <d3-speedometer val="(info.load.longterm / info.vcpu.length) | number:2" title="Normalized" subtitle="15 mins" class="chart"></d3-speedometer>
        
         <div class="kpi-group">
           <p>{{info.load.shortterm | number:2}}<span class="stat-label"> 1 min</span></p>
@@ -14,7 +14,7 @@
         </div> 
 
         <div class="vcpu">
-          <p class="stats">{{info.vcpu.length}}<span class="stat-label"> vCPUs</span></p>
+          <p class="stats">{{info.vcpu.length}}<span class="stat-label"> CPUs</span></p>
           <d3-bar-chart val="info.vcpu" class="chart" domain="0,1"></d3-bar-chart>
         </div>
       </div>
@@ -118,8 +118,9 @@
     <div class="timestamp" ng-show="time">
       <span class="stamp">
         {{(time*1000)|date:'EEEE, MMMM d HH:mm'}}
+        <i class="icon icon-step-forward" ng-click="time = null"></i>
       </span>
-      <i class="icon icon-remove-circle icon-white" ng-click="time = null"></i>
+      
     </div>
     <d3-tooltip message="tooltip"></d3-tooltip>
     <d3-timeseries val="graph" scheme="load memory storage network" period="period" 
