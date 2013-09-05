@@ -3,7 +3,7 @@ Collectd3 is a modern visualization of [collectd](http://collectd.org/) system p
 
 It integrates with other graphical tools,like [Collectd Graph Panel](https://collectd.org/wiki/index.php/Collectd_Graph_Panel) 
 
-
+See the [live demo](http://184.72.154.239:9000/). 
 
 ## Pre-requisites: 
 
