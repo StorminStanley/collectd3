@@ -71,7 +71,7 @@
               <span class="sub-name">{{disk.name}}</span><span class="stat-label">Total </span> {{bytesToSize(disk.used + disk.free).value}}<span class="stat-label"> {{bytesToSize(disk.used + disk.free).multi}}</span>
             </div>
             <div class="bars">
-              <div class="usage" ng-style="{ width: 365*disk.used/(disk.used+disk.free)+'px' }">
+              <div class="usage" ng-style="{ width: disk.used/(disk.used+disk.free)*100+'%' }">
                 <div class="bar">
                   <p class="number">
                     {{bytesToSize(disk.used).value}}
@@ -80,7 +80,7 @@
                 </div>
                 <p class="stat-label">Committed</p>
               </div>
-              <div class="free" ng-style="{ width: 365*disk.free/(disk.used+disk.free)+'px' }">
+              <div class="free" ng-style="{ width: disk.free/(disk.used+disk.free)*100+'%' }">
                 <div class="bar">
                   <p class="number">
                     {{bytesToSize(disk.free).value}}
