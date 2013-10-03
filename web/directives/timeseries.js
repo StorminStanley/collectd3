@@ -105,7 +105,7 @@ angular.module('main')
               scope.d3Mouseout();
             })
             .on("mousemove", function () {
-              scope.d3Mousemove({x: event.x, y: event.y});
+              scope.d3Mousemove({x: d3.event.clientX, y: d3.event.clientY});
             })
             .on("click", function (d) {
               scope.d3Click({ time: d[0] });
