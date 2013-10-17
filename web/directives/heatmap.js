@@ -84,7 +84,7 @@ angular.module('main')
             .on("click", function (d) { scope.d3Click(d); })
             .on("mouseover", function (d) { scope.d3Mouseover(d); })
             .on("mouseout", function (d) { scope.d3Mouseout(d); })
-            .on("mousemove", function () { scope.d3Mousemove({x: event.x, y: event.y}); });
+            .on("mousemove", function () { scope.d3Mousemove({x: d3.event.clientX, y: d3.event.clientY}); });
         });
           
       }
